@@ -146,17 +146,17 @@
         <form action="reg_user" method="POST">
             <div class="form-group">
                 <label>ชื่อผู้ใช้งาน (Username)</label>
-                <input type="text" name="username" placeholder="เช่น somchai_99" required>
+                <input type="text" name="username" required>
             </div>
 
             <div class="form-group">
                 <label>อีเมล (Email)</label>
-                <input type="email" name="email" placeholder="example@email.com" required>
+                <input type="email" name="email" required>
             </div>
 
             <div class="form-group">
                 <label>รหัสผ่าน (Password)</label>
-                <input type="password" name="password" placeholder="••••••••" required>
+                <input type="password" name="password" required>
             </div>
 
             <div style="display: flex; gap: 15px;">
@@ -176,7 +176,7 @@
 
             <div class="form-group">
                 <label>จังหวัด</label>
-                <input type="text" name="province" placeholder="ระบุจังหวัดของคุณ">
+                <input type="text" name="province">
             </div>
 
             <button type="submit" class="btn-register">สร้างบัญชีผู้ใช้งาน</button>

@@ -171,17 +171,17 @@
             
             <div class="form-group">
                 <label>ชื่อกิจกรรม <span style="color: var(--danger);">*</span></label>
-                <input type="text" name="event_name" placeholder="เช่น กิจกรรมวิ่งเพื่อสุขภาพ หรือ Workshop เขียนโปรแกรม" required>
+                <input type="text" name="event_name" required>
             </div>
 
             <div class="form-group">
                 <label>รายละเอียดกิจกรรม</label>
-                <textarea name="description" placeholder="อธิบายกิจกรรมของคุณให้ผู้คนสนใจ..."></textarea>
+                <textarea name="description"></textarea>
             </div>
 
             <div class="form-group">
                 <label>สถานที่จัดงาน</label>
-                <input type="text" name="location" placeholder="ระบุตึก ห้อง หรือลิงก์ Google Maps">
+                <input type="text" name="location">
             </div>
 
             <div class="date-grid">
@@ -210,7 +210,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit">✨ ยืนยันการสร้างกิจกรรม</button>
+            <button type="submit" class="btn-submit"> ยืนยันการสร้างกิจกรรม</button>
         </form>
     </main>
 

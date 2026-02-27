@@ -165,7 +165,7 @@
                     $status_class = 'status-pending';
                     $status_text = '⏳ กำลังรอการอนุมัติ';
 
-                    if ($row->reg_status === 'joined') {
+                    if ($row->reg_status === 'approved') {
                         $status_class = 'status-joined';
                         $status_text = '✅ อนุมัติแล้ว';
                     } elseif ($row->reg_status === 'rejected') {

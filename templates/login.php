@@ -153,12 +153,12 @@
         <form action="login" method="post">
             <div class="form-group">
                 <label for="email">อีเมลผู้ใช้งาน</label>
-                <input type="email" name="email" id="email" placeholder="example@mail.com" required />
+                <input type="email" name="email" id="email" required />
             </div>
 
             <div class="form-group">
                 <label for="password">รหัสผ่าน</label>
-                <input type="password" name="password" id="password" placeholder="••••••••" required />
+                <input type="password" name="password" id="password" required />
             </div>
             
             <button type="submit">เข้าสู่ระบบ</button>

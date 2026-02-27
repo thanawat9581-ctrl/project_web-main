@@ -183,14 +183,14 @@
                 </div>
 
                 <div class="btn-group">
-                    <button type="submit" class="btn-save">✨ บันทึกการแก้ไข</button>
+                    <button type="submit" class="btn-save"> บันทึกการแก้ไข</button>
                     <a href="/event_list" class="btn-cancel">ยกเลิกและกลับ</a>
                 </div>
             </form>
 
         <?php else: ?>
             <div style="text-align: center; padding: 40px;">
-                <p style="font-size: 18px; color: #e74a3b;">⚠️ ไม่พบข้อมูลกิจกรรมที่ต้องการแก้ไข</p>
+                <p style="font-size: 18px; color: #e74a3b;">ไม่พบข้อมูลกิจกรรมที่ต้องการแก้ไข</p>
                 <a href="/event_list" class="btn-save" style="display: inline-block; text-decoration: none;">กลับไปยังรายการ</a>
             </div>
         <?php endif; ?>
