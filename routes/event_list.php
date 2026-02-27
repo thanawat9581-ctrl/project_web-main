@@ -1,0 +1,20 @@
+<?php
+function getMyEvents() {
+    $conn = getConnection();
+    $user_id = $_SESSION['user_id'] ?? 0;
+    
+    // ดึงกิจกรรมที่สร้าง + รูปภาพ + จำนวนผู้สมัครปัจจุบัน
+    $sql = "SELECT e.*, i.image_url, 
+            (SELECT COUNT(*) FROM registration r WHERE r.event_id = e.event_id) as member_count
+            FROM EVENTS e 
+            LEFT JOIN IMAGES i ON e.event_id = i.event_id
+            WHERE e.user_id = ?";
+            
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+$result = getMyEvents();
+renderView('event_list', ['result' => $result]);
