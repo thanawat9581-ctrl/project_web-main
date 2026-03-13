@@ -14,8 +14,8 @@ function home() {
             (SELECT COUNT(*) FROM registration r 
              WHERE r.event_id = e.event_id 
              AND r.status = 'approved') as current_p 
-            FROM EVENTS e 
-            LEFT JOIN IMAGES i ON e.event_id = i.event_id
+            FROM events e 
+            LEFT JOIN images i ON e.event_id = i.event_id
             WHERE e.user_id != ?"; // <-- เงื่อนไขหลัก
     
     if (!empty($keyword)) {

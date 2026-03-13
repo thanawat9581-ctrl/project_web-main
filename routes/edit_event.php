@@ -2,7 +2,7 @@
 // ฟังก์ชันอัปเดตข้อมูล Text
 function updateEvent(int $id, array $data): bool {
     $conn = getConnection();
-    $sql = 'UPDATE EVENTS SET event_name = ?, description = ?, location = ?, start_date = ?, end_date = ?, max_participants = ? WHERE event_id = ?';
+    $sql = 'UPDATE events SET event_name = ?, description = ?, location = ?, start_date = ?, end_date = ?, max_participants = ? WHERE event_id = ?';
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('ssssssi', $data['event_name'], $data['description'], $data['location'], $data['start_date'], $data['end_date'], $data['max_participants'], $id);
     return $stmt->execute();
@@ -12,11 +12,11 @@ function updateEvent(int $id, array $data): bool {
 function updateEventImage(int $event_id, string $image_url): bool {
     $conn = getConnection();
     // ตรวจสอบว่ามีแถวในตาราง IMAGES หรือยัง (ถ้าใช้ตารางแยก)
-    $check = $conn->query("SELECT * FROM IMAGES WHERE event_id = $event_id");
+    $check = $conn->query("SELECT * FROM images WHERE event_id = $event_id");
     if ($check->num_rows > 0) {
-        $sql = "UPDATE IMAGES SET image_url = ? WHERE event_id = ?";
+        $sql = "UPDATE images SET image_url = ? WHERE event_id = ?";
     } else {
-        $sql = "INSERT INTO IMAGES (image_url, event_id) VALUES (?, ?)";
+        $sql = "INSERT INTO images (image_url, event_id) VALUES (?, ?)";
     }
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $image_url, $event_id);
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // ดึงข้อมูลเก่ามาแสดง (รวมรูปภาพ)
 $conn = getConnection();
-$sql = "SELECT e.*, i.image_url FROM EVENTS e LEFT JOIN IMAGES i ON e.event_id = i.event_id WHERE e.event_id = $id";
+$sql = "SELECT e.*, i.image_url FROM events e LEFT JOIN images i ON e.event_id = i.event_id WHERE e.event_id = $id";
 $event = $conn->query($sql)->fetch_object();
 
 renderView('edit_event', ['event' => $event]);

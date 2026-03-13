@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +40,7 @@
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             align-items: flex-start;
             transition: transform 0.2s ease;
@@ -47,7 +48,7 @@
 
         .event-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         /* ส่วนรูปภาพ */
@@ -106,9 +107,23 @@
             font-size: 13px;
         }
 
-        .status-joined { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
-        .status-rejected { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
-        .status-pending { background-color: #fff3cd; color: #664d03; border: 1px solid #ffecb5; }
+        .status-joined {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #664d03;
+            border: 1px solid #ffecb5;
+        }
 
         /* ลิงก์รายละเอียด */
         .detail-link {
@@ -145,9 +160,12 @@
             transition: background 0.3s;
         }
 
-        .btn-home:hover { background: #2e59d9; }
+        .btn-home:hover {
+            background: #2e59d9;
+        }
     </style>
 </head>
+
 <body>
 
     <?php include 'header.php' ?>
@@ -172,36 +190,43 @@
                         $status_class = 'status-rejected';
                         $status_text = '❌ ปฏิเสธการเข้าร่วม';
                     }
+
+
             ?>
-                <div class="event-card">
-                    <div class="event-image-wrapper">
-                        <?php if (!empty($row->image_url)): ?>
-                            <img src="/uploads/<?= htmlspecialchars($row->image_url) ?>" class="event-image" alt="Event Image">
-                        <?php else: ?>
-                            <div class="no-image">🖼️ ไม่มีรูปภาพ</div>
-                        <?php endif; ?>
-                    </div>
-
-                    <div class="event-content">
-                        <h3 class="event-title"><?= htmlspecialchars($row->event_name) ?></h3>
-                        <p class="event-info">
-                            <strong>📍 สถานที่:</strong> <?= htmlspecialchars($row->location) ?><br>
-                            <strong>⏰ เวลา:</strong> <?= date('d/m/Y', strtotime($row->start_date)) ?> - <?= date('d/m/Y', strtotime($row->end_date)) ?>
-                        </p>
-
-                        <div class="status-badge <?= $status_class ?>">
-                            <?= $status_text ?>
+                    <div class="event-card">
+                        <div class="event-image-wrapper">
+                            <?php if (!empty($row->image_url)): ?>
+                                <img src="/uploads/<?= htmlspecialchars($row->image_url) ?>" class="event-image" alt="Event Image">
+                            <?php else: ?>
+                                <div class="no-image">🖼️ ไม่มีรูปภาพ</div>
+                            <?php endif; ?>
                         </div>
-                        
-                        <div>
-                            <a href="/event_detail?id=<?= $row->event_id ?>" class="detail-link">ดูรายละเอียดงานนี้ →</a>
+
+                        <div class="event-content">
+                            <h3 class="event-title"><?= htmlspecialchars($row->event_name) ?></h3>
+                            <p class="event-info">
+                                <strong>📍 สถานที่:</strong> <?= htmlspecialchars($row->location) ?><br>
+                                <strong>⏰ เวลา:</strong> <?= date('d/m/Y', strtotime($row->start_date)) ?> - <?= date('d/m/Y', strtotime($row->end_date)) ?>
+                            </p>
+
+                            <div class="status-badge <?= $status_class ?>">
+                                <?= $status_text ?>
+                            </div>
+                            <?php if ($row->reg_status === 'approved'): ?>
+                                    <a href="/get_otp?event_id=<?= (int)$row->event_id ?>" class="btn-otp">
+                                        🔑 รับรหัส OTP
+                                    </a>
+                            <?php endif; ?>
+
+                            <div>
+                                <a href="/event_detail?id=<?= $row->event_id ?>" class="detail-link">ดูรายละเอียดงานนี้ →</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php 
+                <?php
                 endwhile;
-            else: 
-            ?>
+            else:
+                ?>
                 <div class="empty-state">
                     <p style="font-size: 18px; color: #858796;">คุณยังไม่ได้ลงทะเบียนเข้าร่วมกิจกรรมใดๆ</p>
                     <a href="/home" class="btn-home">ไปสำรวจกิจกรรมที่น่าสนใจ</a>
@@ -213,4 +238,5 @@
     <?php include 'footer.php' ?>
 
 </body>
+
 </html>

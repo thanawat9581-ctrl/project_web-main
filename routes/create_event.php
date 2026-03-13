@@ -6,7 +6,7 @@ function insertEvent(array $events): int|bool
     $user_id = $_SESSION['user_id'] ?? null;
     if (!$user_id) return false;
 
-    $sql = 'INSERT INTO EVENTS (user_id, event_name, description, location, start_date, end_date, max_participants) 
+    $sql = 'INSERT INTO events (user_id, event_name, description, location, start_date, end_date, max_participants) 
             VALUES (?, ?, ?, ?, ?, ?, ?)';
     
     $stmt = $conn->prepare($sql);
@@ -28,7 +28,7 @@ function insertEvent(array $events): int|bool
 function insertEventImage(int $event_id, string $image_url): bool
 {
     $conn = getConnection();
-    $sql = "INSERT INTO IMAGES (event_id, image_url) VALUES (?, ?)";
+    $sql = "INSERT INTO images (event_id, image_url) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("is", $event_id, $image_url);

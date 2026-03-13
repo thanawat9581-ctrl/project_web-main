@@ -216,12 +216,5 @@
 
     <?php include 'footer.php' ?>
 
-    <script>
-        function updateFileName(input) {
-            const fileName = input.files[0].name;
-            document.getElementById('fileName').innerHTML = "📁 ไฟล์ที่เลือก: " + fileName;
-        }
-    </script>
-
 </body>
 </html>

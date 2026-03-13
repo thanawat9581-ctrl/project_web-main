@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['event_id'])) {
 // --- ส่วนที่ 2: ดึงข้อมูลมาแสดงผล (GET) ---
 $sql_list = "SELECT e.*, i.image_url, r.status as reg_status 
              FROM registration r
-             JOIN EVENTS e ON r.event_id = e.event_id
-             LEFT JOIN IMAGES i ON e.event_id = i.event_id
+             JOIN events e ON r.event_id = e.event_id
+             LEFT JOIN images i ON e.event_id = i.event_id
              WHERE r.user_id = ?
              ORDER BY r.register_date DESC";
 

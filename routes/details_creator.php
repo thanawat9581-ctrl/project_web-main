@@ -3,8 +3,8 @@
 
 function getEventDetailData($conn, $id) {
     // ดึงข้อมูลกิจกรรมและรูปภาพ
-    $sql_event = "SELECT e.*, i.image_url FROM EVENTS e 
-                  LEFT JOIN IMAGES i ON e.event_id = i.event_id 
+    $sql_event = "SELECT e.*, i.image_url FROM events e 
+                  LEFT JOIN images i ON e.event_id = i.event_id 
                   WHERE e.event_id = ?";
     $stmt_event = $conn->prepare($sql_event);
     $stmt_event->bind_param("i", $id);

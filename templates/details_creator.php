@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             margin-bottom: 40px;
             border: 1px solid #e3e6f0;
         }
@@ -48,7 +49,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .header-info {
@@ -68,15 +69,20 @@
             margin-bottom: 15px;
         }
 
-        .info-item { font-size: 15px; }
-        .info-item strong { color: #2c3e50; }
+        .info-item {
+            font-size: 15px;
+        }
+
+        .info-item strong {
+            color: #2c3e50;
+        }
 
         /* Table Design */
         .table-container {
             background: white;
             border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border: 1px solid #e3e6f0;
         }
 
@@ -107,7 +113,9 @@
             vertical-align: middle;
         }
 
-        tr:hover { background-color: #fcfcfc; }
+        tr:hover {
+            background-color: #fcfcfc;
+        }
 
         /* Status Badges */
         .badge {
@@ -116,9 +124,21 @@
             font-size: 13px;
             font-weight: 600;
         }
-        .badge-success { background: #e1f7ed; color: var(--success); }
-        .badge-danger { background: #ffe5e5; color: var(--danger); }
-        .badge-warning { background: #fff4e5; color: var(--warning); }
+
+        .badge-success {
+            background: #e1f7ed;
+            color: var(--success);
+        }
+
+        .badge-danger {
+            background: #ffe5e5;
+            color: var(--danger);
+        }
+
+        .badge-warning {
+            background: #fff4e5;
+            color: var(--warning);
+        }
 
         /* Action Buttons */
         .btn {
@@ -131,11 +151,27 @@
             transition: 0.3s;
             font-size: 14px;
         }
-        .btn-approve { background: var(--success); color: white; }
-        .btn-approve:hover { background: #17a673; transform: scale(1.05); }
 
-        .btn-reject { background: #fff; color: var(--danger); border: 1px solid var(--danger); }
-        .btn-reject:hover { background: var(--danger); color: white; }
+        .btn-approve {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #17a673;
+            transform: scale(1.05);
+        }
+
+        .btn-reject {
+            background: #fff;
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .btn-reject:hover {
+            background: var(--danger);
+            color: white;
+        }
 
         .back-link {
             display: inline-block;
@@ -144,15 +180,27 @@
             text-decoration: none;
             font-weight: 600;
         }
-        .back-link:hover { text-decoration: underline; }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
 
         @media (max-width: 768px) {
-            .event-header-card { flex-direction: column; }
-            .header-img { max-width: 100%; }
-            .info-grid { grid-template-columns: 1fr; }
+            .event-header-card {
+                flex-direction: column;
+            }
+
+            .header-img {
+                max-width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <?php include 'header.php' ?>
@@ -196,7 +244,9 @@
                             <?php while ($user = $data['participants']->fetch_object()): ?>
                                 <tr>
                                     <td style="font-weight: 500; color: #2c3e50;">
-                                        <?= htmlspecialchars($user->name) ?>
+                                        <a href="/user_profile?id=<?= (int)$user->user_id ?>">
+                                            <?= htmlspecialchars($user->name) ?>
+                                        </a>
                                     </td>
                                     <td style="text-align: center;">
                                         <?php if ($user->status === 'approved'): ?>
@@ -218,9 +268,9 @@
                                                 </button>
                                             <?php endif; ?>
 
-                                            <button type="submit" name="status" value="rejected" 
-                                                    onclick="return confirm('ยืนยันการปฏิเสธหรือลบผู้สมัครรายนี้?')" 
-                                                    class="btn btn-reject" style="margin-left: 5px;">
+                                            <button type="submit" name="status" value="rejected"
+                                                onclick="return confirm('ยืนยันการปฏิเสธหรือลบผู้สมัครรายนี้?')"
+                                                class="btn btn-reject" style="margin-left: 5px;">
                                                 ลบชื่อ
                                             </button>
                                         </form>
@@ -243,4 +293,5 @@
     <?php include 'footer.php' ?>
 
 </body>
+
 </html>
