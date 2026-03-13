@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
-    // ------------------------------------------
 
     // อัปเดตสถานะใน DB ตามปกติ
     $sql = "UPDATE registration SET status = ? WHERE event_id = ? AND user_id = ?";

@@ -8,12 +8,12 @@ function checkLogin(string $email, string $password): ?array // เปลี่�
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         // 2. ถ้า password ถูก ให้คืนค่าข้อมูล user ทั้งหมดออกมา
         if (password_verify($password, $row['password'])) {
-            return $row; 
+            return $row;
         }
     }
     return null;
@@ -26,11 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 3. รับค่า user มาจากฟังก์ชัน
     $user = checkLogin($email, $password);
-
     if ($user) {
         // 4. ตอนนี้ $user['user_id'] จะมีค่าแล้ว!
-        $_SESSION['user_id'] = $user['user_id']; 
-        $_SESSION['username'] = $user['username']; 
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
         $_SESSION['user_email'] = $email;
         $_SESSION['is_logged_in'] = true;
 

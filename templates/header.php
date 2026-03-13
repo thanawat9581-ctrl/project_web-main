@@ -30,6 +30,9 @@ $current_uri = $_SERVER['REQUEST_URI'];
                         <span class="welcome-text">ยินดีต้อนรับ,</span>
                         <span class="user-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'ผู้ใช้งาน') ?></span>
                     </div>
+                    <div>
+                        <a href="/logout">ออกจากระบบ</a>
+                    </div>
                 </div>
             <?php else: ?>
                 <a href="/login" class="btn-login">
