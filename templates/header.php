@@ -1,6 +1,7 @@
 <?php
 // เช็คสถานะ Login และ URI สำหรับ Active Class
 $isLoggedIn = isset($_SESSION['user_id']);
+$isLoggedInName = isset($_SESSION['username']);
 $current_uri = $_SERVER['REQUEST_URI'];
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -10,26 +11,21 @@ $current_uri = $_SERVER['REQUEST_URI'];
         <a href="/home" class="logo">
             🚀 EVENT<span>SYSTEM</span>
         </a>
-
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
-
         <label for="nav-toggle" class="nav-toggle-label">
             <span></span>
             <span></span>
             <span></span>
         </label>
-
         <ul class="nav-menu">
             <li><a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a></li>
-
             <?php if ($isLoggedIn): ?>
                 <li><a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a></li>
                 <li><a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a></li>
                 <li><a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a></li>
-
                 <li class="user-item-wrapper">
                     <div class="user-control">
-                        <span class="user-greeting">สวัสดี, <span class="user-name-bold"><?= htmlspecialchars($_SESSION['user_name'] ?? 'ผู้ใช้งาน') ?></span></span>
+                        <span class="user-greeting">สวัสดี, <span class="user-name-bold"><?= htmlspecialchars($isLoggedInName = $data['username'] ?? 'ผู้ใช้งาน') ?></span></span>
                         <a href="/logout" class="btn-logout-minimal">ออกจากระบบ</a>
                     </div>
                 </li>

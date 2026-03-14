@@ -140,6 +140,10 @@
             .event-img { margin: 0 0 15px 0; width: 100%; height: 150px; }
             .action-group { margin-top: 15px; width: 100%; justify-content: center; }
         }
+        .badge-danger {
+            background: #ffe5e5;
+            color: var(--danger);
+        }
     </style>
 </head>
 <body>
@@ -189,8 +193,8 @@
                             <a href="/edit_event?id=<?= $row->event_id ?>" class="btn-action btn-edit">
                                 ✏️ แก้ไข
                             </a>
-                            <a href="/del?event_id=<?= $row->event_id ?>" class="btn-action btn-edit" onclick="return confirm('ยืนยันการลบกิจกรรม')">
-                                ✏️ ลบ
+                            <a href="/del?event_id=<?= $row->event_id ?>" class="btn-action badge-danger" onclick="return confirm('ยืนยันการลบกิจกรรม')">
+                                ❌ ลบ
                             </a>
                         </div>
                     </div>
