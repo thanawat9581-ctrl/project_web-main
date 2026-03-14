@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@
             background: white;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             margin-bottom: 40px;
             text-align: center;
         }
@@ -61,22 +62,33 @@
             cursor: pointer;
         }
 
-        /* Card Design */
         .event-card {
             background: white;
             border-radius: 20px;
             margin-bottom: 25px;
             display: flex;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             border: 1px solid #e3e6f0;
             transition: 0.3s;
         }
 
-        .event-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
 
-        .event-img-container { width: 300px; height: 240px; flex-shrink: 0; }
-        .event-img { width: 100%; height: 100%; object-fit: cover; }
+        .event-img-container {
+            width: 300px;
+            height: 240px;
+            flex-shrink: 0;
+        }
+
+        .event-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .event-content {
             padding: 25px;
@@ -86,7 +98,11 @@
             justify-content: space-between;
         }
 
-        .event-title { margin: 0 0 10px 0; color: #2c3e50; font-size: 22px; }
+        .event-title {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 22px;
+        }
 
         .event-meta {
             display: grid;
@@ -123,6 +139,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <?php include 'header.php' ?>
@@ -131,7 +148,7 @@
         <div class="search-container">
             <h1>สำรวจกิจกรรมที่น่าสนใจ</h1>
             <form action="/home" method="POST" class="search-box">
-                <input type="text" name="keyword" placeholder="ค้นหาชื่อกิจกรรม หรือสถานที่..." value="<?= htmlspecialchars($_POST['keyword'] ?? '') ?>" />
+                <input type="text" name="keyword" placeholder="" value="<?= htmlspecialchars($_POST['keyword'] ?? '') ?>" />
                 <button type="submit" class="btn-search">ค้นหา</button>
             </form>
         </div>
@@ -139,10 +156,11 @@
         <div class="event-list">
             <?php if ($data['result'] && $data['result']->num_rows > 0): ?>
                 <?php while ($row = $data['result']->fetch_object()): ?>
-                    <?php 
-                        $max = (int)$row->max_participants;
-                        $current = (int)$row->current_p; // จำนวนที่อนุมัติแล้วจาก SQL
-                        $is_full = ($max > 0 && $current >= $max);
+                    <?php
+                    $max = (int)$row->max_participants;
+                    // ดึงค่าจำนวนคนเช็คอินจาก current_p ที่เราทำ Subquery ไว้
+                    $current = (int)($row->current_p ?? 0);
+                    $is_full = ($max > 0 && $current >= $max);
                     ?>
 
                     <div class="event-card">
@@ -165,7 +183,7 @@
                                     <div class="meta-item">📍 <strong>สถานที่:</strong> <?= htmlspecialchars($row->location) ?></div>
                                     <div class="meta-item">📅 <strong>วันที่:</strong> <?= date('d/m/Y', strtotime($row->start_date)) ?></div>
                                     <div class="meta-item">
-                                        👥 <strong>อนุมัติแล้ว:</strong> 
+                                        👥 <strong>เข้าร่วมแล้ว:</strong>
                                         <span style="color: <?= $is_full ? 'var(--danger-color)' : 'var(--primary-color)' ?>; font-weight: bold;">
                                             <?= $current ?> / <?= $max ?>
                                         </span>
@@ -185,7 +203,6 @@
                                         <button type="submit" class="btn-join btn-active">สมัครเข้าร่วม</button>
                                     </form>
                                 <?php endif; ?>
-                                <a href="/event_detail?id=<?= $row->event_id ?>" style="color: var(--primary-color); text-decoration: none; font-size: 14px; font-weight: 600;">ดูรายละเอียด →</a>
                             </div>
                         </div>
                     </div>

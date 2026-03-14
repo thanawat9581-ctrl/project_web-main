@@ -12,6 +12,11 @@ $current_uri = $_SERVER['REQUEST_URI'];
                 <span class="logo-text">EVENT<span class="highlight">SYSTEM</span></span>
             </div>
         </a>
+        <label for="menu-toggle" class="hamburger-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
 
         <div class="nav-links">
             <a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a>
@@ -20,24 +25,23 @@ $current_uri = $_SERVER['REQUEST_URI'];
                 <a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a>
                 <a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a>
                 <a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a>
+                
+            <?php else: ?>
+                <a href="/login" class="mobile-only login-link">เข้าสู่ระบบ</a>
             <?php endif; ?>
         </div>
 
-        <div class="nav-auth">
+        <div class="nav-auth desktop-only">
             <?php if ($isLoggedIn): ?>
                 <div class="user-profile">
                     <div class="user-info">
                         <span class="welcome-text">ยินดีต้อนรับ,</span>
                         <span class="user-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'ผู้ใช้งาน') ?></span>
                     </div>
-                    <div>
-                        <a href="/logout">ออกจากระบบ</a>
-                    </div>
+                    <a class="mobile-only logout-link"href="/logout">ออกจากระบบ</a>
                 </div>
             <?php else: ?>
-                <a href="/login" class="btn-login">
-                    <span>เข้าสู่ระบบ</span>
-                </a>
+                <a href="/login" class="btn-login-nav">เข้าสู่ระบบ</a>
             <?php endif; ?>
         </div>
     </div>
@@ -56,18 +60,22 @@ $current_uri = $_SERVER['REQUEST_URI'];
 
     /* Navbar Container */
     .main-navbar {
-        background: var(--glass);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(227, 230, 240, 0.6);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        transition: all 0.3s ease;
-    }
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(227, 230, 240, 0.6);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    /* --- สิ่งที่ต้องเพิ่ม --- */
+    width: 100%;       /* มั่นใจว่ากว้างเต็มจอ */
+    overflow: visible; /* สำคัญมาก! เพื่อให้เมนูที่ drop down ลงมาไม่โดนตัดขาด */
+}
 
     .nav-container {
         max-width: 1200px;

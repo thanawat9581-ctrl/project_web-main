@@ -190,6 +190,11 @@
                         $status_class = 'status-rejected';
                         $status_text = '❌ ปฏิเสธการเข้าร่วม';
                     }
+                    elseif ($row->reg_status === 'checked_in') {
+                        $status_class = 'status-joined';
+                        $status_text = '✅ เข้าร่วมแล้ว';
+                    }
+
 
 
             ?>
@@ -218,9 +223,6 @@
                                     </a>
                             <?php endif; ?>
 
-                            <div>
-                                <a href="/event_detail?id=<?= $row->event_id ?>" class="detail-link">ดูรายละเอียดงานนี้ →</a>
-                            </div>
                         </div>
                     </div>
                 <?php

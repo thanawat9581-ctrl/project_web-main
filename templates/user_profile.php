@@ -149,8 +149,8 @@
                         <span class="info-label">🚻 เพศ:</span>
                         <span class="info-value">
                             <?php 
-                                if($data['member']->gender == 'M') echo 'ชาย';
-                                elseif($data['member']->gender == 'F') echo 'หญิง';
+                                if($data['member']->gender == 'male') echo 'ชาย';
+                                elseif($data['member']->gender == 'female') echo 'หญิง';
                                 else echo 'ไม่ระบุ';
                             ?>
                         </span>

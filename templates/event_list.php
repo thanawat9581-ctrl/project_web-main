@@ -66,10 +66,7 @@
             transition: transform 0.2s;
         }
 
-        .event-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+        .event-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
         .event-img {
             width: 120px;
@@ -80,17 +77,11 @@
             background: #f1f3f9;
         }
 
-        .event-info {
-            flex: 1;
-        }
+        .event-info { flex: 1; }
 
-        .event-info h3 {
-            margin: 0 0 8px 0;
-            font-size: 20px;
-            color: #2c3e50;
-        }
+        .event-info h3 { margin: 0 0 8px 0; font-size: 20px; color: #2c3e50; }
 
-        /* Badge สำหรับจำนวนผู้สมัคร */
+        /* Badge สำหรับจำนวนผู้เข้าร่วมจริง */
         .applicant-status {
             display: inline-flex;
             align-items: center;
@@ -101,10 +92,7 @@
             color: #5a5c69;
         }
 
-        .applicant-count {
-            font-weight: 800;
-            margin: 0 4px;
-        }
+        .applicant-count { font-weight: 800; margin: 0 4px; }
 
         .full-badge {
             background: var(--danger);
@@ -117,10 +105,7 @@
         }
 
         /* Action Buttons */
-        .action-group {
-            display: flex;
-            gap: 10px;
-        }
+        .action-group { display: flex; gap: 10px; }
 
         .btn-action {
             padding: 10px 18px;
@@ -152,7 +137,7 @@
 
         @media (max-width: 600px) {
             .event-item { flex-direction: column; text-align: center; }
-            .event-img { margin: 0 0 15px 0; width: 100%; height: 180px; }
+            .event-img { margin: 0 0 15px 0; width: 100%; height: 150px; }
             .action-group { margin-top: 15px; width: 100%; justify-content: center; }
         }
     </style>
@@ -170,8 +155,8 @@
         <div class="event-list">
             <?php if ($data['result'] && $data['result']->num_rows > 0): ?>
                 <?php while ($row = $data['result']->fetch_object()): 
-                    // คำนวณสถานะจำนวนคนตรงนี้
-                    $current = (int)$row->member_count;
+                    // จำนวนคนที่เช็คอินสำเร็จ (ดึงมาจาก SQL Query ที่นับเฉพาะ checked_in)
+                    $current = (int)$row->member_count; 
                     $max = (int)$row->max_participants;
                     $is_full = ($current >= $max);
                 ?>
@@ -185,8 +170,8 @@
                         <div class="event-info">
                             <h3><?= htmlspecialchars($row->event_name) ?></h3>
                             <div class="applicant-status">
-                                👥 อนุมัติแล้ว: 
-                                <span class="applicant-count" style="color: <?= $is_full ? 'var(--danger)' : 'var(--primary)' ?>;">
+                                เข้าร่วมแล้ว: 
+                                <span class="applicant-count" style="color: <?= $is_full ? 'var(--danger)' : 'var(--success)' ?>;">
                                     <?= $current ?>
                                 </span> 
                                 / <?= $max ?> คน
@@ -199,7 +184,7 @@
 
                         <div class="action-group">
                             <a href="/details_creator?id=<?= $row->event_id ?>" class="btn-action btn-manage">
-                                📋 รายชื่อผู้สมัคร
+                                📋 จัดการผู้สมัคร
                             </a>
                             <a href="/edit_event?id=<?= $row->event_id ?>" class="btn-action btn-edit">
                                 ✏️ แก้ไข
