@@ -148,7 +148,7 @@
         <div class="search-container">
             <h1>สำรวจกิจกรรมที่น่าสนใจ</h1>
             <form action="/home" method="POST" class="search-box">
-                <input type="text" name="keyword" placeholder="" value="<?= htmlspecialchars($_POST['keyword'] ?? '') ?>" />
+                <input type="text" name="keyword"  value="<?= htmlspecialchars($_POST['keyword'] ?? '') ?>" />
                 <button type="submit" class="btn-search">ค้นหา</button>
             </form>
         </div>
