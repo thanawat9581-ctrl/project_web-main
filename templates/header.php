@@ -3,165 +3,230 @@
 $isLoggedIn = isset($_SESSION['user_id']);
 $current_uri = $_SERVER['REQUEST_URI'];
 ?>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<nav class="main-navbar">
+<nav class="navbar">
     <div class="nav-container">
-        <a href="/home" class="nav-logo">
-            <div class="logo-wrapper">
-                <span class="logo-icon">🚀</span>
-                <span class="logo-text">EVENT<span class="highlight">SYSTEM</span></span>
-            </div>
+        <a href="/home" class="logo">
+            🚀 EVENT<span>SYSTEM</span>
         </a>
-        <label for="menu-toggle" class="hamburger-label">
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+
+        <label for="nav-toggle" class="nav-toggle-label">
             <span></span>
             <span></span>
             <span></span>
         </label>
 
-        <div class="nav-links">
-            <a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a>
-            
-            <?php if ($isLoggedIn): ?>
-                <a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a>
-                <a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a>
-                <a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a>
-                
-            <?php else: ?>
-                <a href="/login" class="mobile-only login-link">เข้าสู่ระบบ</a>
-            <?php endif; ?>
-        </div>
+        <ul class="nav-menu">
+            <li><a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a></li>
 
-        <div class="nav-auth desktop-only">
             <?php if ($isLoggedIn): ?>
-                <div class="user-profile">
-                    <div class="user-info">
-                        <span class="welcome-text">ยินดีต้อนรับ,</span>
-                        <span class="user-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'ผู้ใช้งาน') ?></span>
+                <li><a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a></li>
+                <li><a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a></li>
+                <li><a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a></li>
+
+                <li class="user-item-wrapper">
+                    <div class="user-control">
+                        <span class="user-greeting">สวัสดี, <span class="user-name-bold"><?= htmlspecialchars($_SESSION['user_name'] ?? 'ผู้ใช้งาน') ?></span></span>
+                        <a href="/logout" class="btn-logout-minimal">ออกจากระบบ</a>
                     </div>
-                    <a class="mobile-only logout-link"href="/logout">ออกจากระบบ</a>
-                </div>
+                </li>
             <?php else: ?>
-                <a href="/login" class="btn-login-nav">เข้าสู่ระบบ</a>
+                <li><a href="/login" class="btn-login-main">เข้าสู่ระบบ</a></li>
             <?php endif; ?>
-        </div>
+        </ul>
     </div>
 </nav>
 
 <style>
     :root {
         --primary: #4e73df;
-        --primary-dark: #2e59d9;
-        --text-main: #2c3e50;
-        --text-light: #858796;
-        --white: #ffffff;
-        --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        --glass: rgba(255, 255, 255, 0.95);
+        --dark: #2c3e50;
+        --gray-text: #858796;
+        --light-bg: #f8f9fc;
+        --danger: #e74a3b;
     }
 
-    /* Navbar Container */
-    .main-navbar {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(227, 230, 240, 0.6);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-
-    /* --- สิ่งที่ต้องเพิ่ม --- */
-    width: 100%;       /* มั่นใจว่ากว้างเต็มจอ */
-    overflow: visible; /* สำคัญมาก! เพื่อให้เมนูที่ drop down ลงมาไม่โดนตัดขาด */
-}
+    .navbar {
+        background: #ffffff;
+        border-bottom: 1px solid #e3e6f0;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        font-family: 'Prompt', sans-serif;
+    }
 
     .nav-container {
+        width: 90%;
         max-width: 1200px;
-        width: 100%;
         margin: 0 auto;
-        padding: 0 25px;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    /* Logo Styling */
-    .nav-logo {
-        text-decoration: none;
-        transition: transform 0.3s ease;
-    }
-    .nav-logo:hover { transform: scale(1.05); }
-    
-    .logo-wrapper { display: flex; align-items: center; gap: 10px; }
-    .logo-icon { font-size: 26px; }
-    .logo-text {
+    /* Logo */
+    .logo {
         font-size: 20px;
-        font-weight: 800;
-        color: var(--text-main);
-        letter-spacing: -0.5px;
-    }
-    .logo-text .highlight { color: var(--primary); }
-
-    /* Nav Links & Animations */
-    .nav-links { display: flex; gap: 8px; }
-    .nav-links a {
+        font-weight: 700;
         text-decoration: none;
-        color: var(--text-main);
-        padding: 10px 18px;
-        border-radius: 12px;
-        font-size: 15px;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .logo span {
+        color: var(--primary);
+    }
+
+    /* Menu Layout */
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .nav-menu li a {
+        text-decoration: none;
+        color: var(--dark);
+        /* ลด padding ลง: บน-ล่าง 6px, ซ้าย-ขวา 12px */
+        padding: 6px 12px;
+        font-size: 14px;
+        /* ขนาดกำลังดี ไม่ใหญ่เกินไป */
+        font-weight: 400;
+        border-radius: 0px;
+        /* โค้งมนแบบพอดี */
+    }
+
+    .nav-menu li a:hover {
+    background-color: #ffffff; /* ชี้แล้วเปลี่ยนสีพื้นหลังจางๆ */
+    color: var(--primary);     /* ชี้แล้วเปลี่ยนสีตัวอักษรเป็นน้ำเงิน */
+}
+
+    .nav-menu li a.active {
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    /* User Management Section */
+    .user-item-wrapper {
+        margin-left: 10px;
+        padding-left: 20px;
+        border-left: 2px solid #ffffff;
+    }
+
+    .user-control {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-greeting {
+        font-size: 13.5px;
+        color: var(--gray-text);
+    }
+
+    .user-name-bold {
+        color: var(--dark);
+        font-weight: 600;
+    }
+
+    .btn-logout-minimal {
+        text-decoration: none;
+        font-size: 13px;
         font-weight: 500;
-        position: relative;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--danger);
+        padding: 10px 14px;
+        background: #fff5f5;
+        border-radius: 10px;
+        transition: 0.3s;
     }
 
-    .nav-links a:hover {
-        background: rgba(78, 115, 223, 0.08);
-        color: var(--primary);
+    .btn-logout-minimal:hover {
+        background: var(--danger);
+        color: #ffffff;
+        border-color: var(--danger);
     }
 
-    .nav-links a.active {
-        background: var(--primary);
-        color: var(--white);
-        box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
+    .btn-login-main {
+        background: var(--primary) !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 10px rgba(78, 115, 223, 0.2);
     }
 
-    /* Auth Section */
-    .nav-auth { display: flex; align-items: center; }
-
-    .user-profile { display: flex; align-items: center; gap: 20px; }
-    .user-info { display: flex; flex-direction: column; text-align: right; }
-    .welcome-text { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
-    .user-name { font-size: 14px; font-weight: 600; color: var(--text-main); }
-
-    /* Buttons */
-    .btn-login {
-        background: transparent;
-        color: var(--primary);
-        border: 2px solid var(--primary);
-    }
-    .btn-login:hover {
-        background: var(--primary);
-        color: var(--white);
-        box-shadow: 0 5px 15px rgba(78, 115, 223, 0.2);
+    /* Mobile Toggle */
+    .nav-toggle {
+        display: none;
     }
 
-    .btn-logout {
-        background: rgba(231, 74, 59, 0.1);
-        color: #e74a3b;
-        border: 1px solid rgba(231, 74, 59, 0.2);
-    }
-    .btn-logout:hover {
-        background: #e74a3b;
-        color: var(--white);
-        box-shadow: 0 5px 15px rgba(231, 74, 59, 0.2);
+    .nav-toggle-label {
+        display: none;
+        cursor: pointer;
     }
 
-    /* Responsive */
+    .nav-toggle-label span {
+        width: 22px;
+        height: 2px;
+        background: var(--dark);
+        display: block;
+        margin: 5px 0;
+        border-radius: 2px;
+    }
+
+    /* --- Responsive Logic --- */
     @media (max-width: 992px) {
-        .nav-links { display: none; } /* แนะนำให้ทำ Hamburger Menu เพิ่มเติมสำหรับ Mobile */
-        .user-info { display: none; }
+        .nav-toggle-label {
+            display: block;
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 75px;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            flex-direction: column;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .nav-menu li {
+            width: 100%;
+        }
+
+        .nav-menu li a {
+            padding: 18px 25px;
+            border-radius: 0;
+        }
+
+        .user-item-wrapper {
+            margin: 10px 0 0 0;
+            padding: 20px 25px;
+            border-left: none;
+            border-top: 1px solid #f1f3f9;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .user-control {
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-toggle:checked~.nav-menu {
+            display: flex;
+        }
     }
 </style>

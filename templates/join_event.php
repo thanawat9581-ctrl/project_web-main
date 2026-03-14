@@ -194,9 +194,6 @@
                         $status_class = 'status-joined';
                         $status_text = '✅ เข้าร่วมแล้ว';
                     }
-
-
-
             ?>
                     <div class="event-card">
                         <div class="event-image-wrapper">
