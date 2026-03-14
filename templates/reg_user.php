@@ -23,8 +23,6 @@
             min-height: 100vh;
             color: var(--text-color);
         }
-
-        /* กล่องหลักของหน้า Register */
         .reg-card {
             background: white;
             width: 100%;
@@ -35,8 +33,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* แถบสีตกแต่งด้านบน */
         .reg-card::before {
             content: "";
             position: absolute;
@@ -90,8 +86,6 @@
             background-color: #fff;
             box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.1);
         }
-
-        /* ปุ่มยืนยัน */
         .btn-register {
             width: 100%;
             background: var(--bg-gradient);
@@ -127,7 +121,6 @@
             text-decoration: underline;
         }
 
-        /* ปรับแต่งส่วนเพศให้ดูดีขึ้น */
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234e73df' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");

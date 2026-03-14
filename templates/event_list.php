@@ -193,7 +193,7 @@
                             <a href="/edit_event?id=<?= $row->event_id ?>" class="btn-action btn-edit">
                                 ✏️ แก้ไข
                             </a>
-                            <a href="/del?event_id=<?= $row->event_id ?>" class="btn-action badge-danger" onclick="return confirm('ยืนยันการลบกิจกรรม')">
+                            <a href="/del?event_id=<?= $row->event_id ?>" class="btn-action badge-danger">
                                 ❌ ลบ
                             </a>
                         </div>

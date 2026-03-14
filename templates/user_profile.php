@@ -117,7 +117,6 @@
         transform: translateY(-2px);
     }
 
-    /* ข้อความแจ้งเตือนถ้าไม่พบข้อมูล */
     .error-box {
         text-align: center;
         background: white;

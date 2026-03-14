@@ -255,7 +255,6 @@
 
                                             <?php if ($user->status !== 'checked_in'): ?>
                                                 <button type="submit" name="status" value="rejected"
-                                                    onclick="return confirm('ยืนยันการปฏิเสธ?')"
                                                     class="btn btn-reject" style="margin-left: 5px;">ปฏิเสธ</button>
                                             <?php endif; ?>
                                         </form>

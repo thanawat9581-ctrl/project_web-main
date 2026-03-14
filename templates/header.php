@@ -5,37 +5,6 @@ $isLoggedInName = isset($_SESSION['username']);
 $current_uri = $_SERVER['REQUEST_URI'];
 ?>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="/home" class="logo">
-            🚀 EVENT<span>SYSTEM</span>
-        </a>
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-        <ul class="nav-menu">
-            <li><a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a></li>
-            <?php if ($isLoggedIn): ?>
-                <li><a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a></li>
-                <li><a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a></li>
-                <li><a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a></li>
-                <li class="user-item-wrapper">
-                    <div class="user-control">
-                        <span class="user-greeting">สวัสดี, <span class="user-name-bold"><?= htmlspecialchars($isLoggedInName = $data['username'] ?? 'ผู้ใช้งาน') ?></span></span>
-                        <a href="/logout" class="btn-logout-minimal">ออกจากระบบ</a>
-                    </div>
-                </li>
-            <?php else: ?>
-                <li><a href="/login" class="btn-login-main">เข้าสู่ระบบ</a></li>
-            <?php endif; ?>
-        </ul>
-    </div>
-</nav>
-
 <style>
     :root {
         --primary: #4e73df;
@@ -66,7 +35,6 @@ $current_uri = $_SERVER['REQUEST_URI'];
         align-items: center;
     }
 
-    /* Logo */
     .logo {
         font-size: 20px;
         font-weight: 700;
@@ -81,7 +49,6 @@ $current_uri = $_SERVER['REQUEST_URI'];
         color: var(--primary);
     }
 
-    /* Menu Layout */
     .nav-menu {
         display: flex;
         list-style: none;
@@ -94,18 +61,15 @@ $current_uri = $_SERVER['REQUEST_URI'];
     .nav-menu li a {
         text-decoration: none;
         color: var(--dark);
-        /* ลด padding ลง: บน-ล่าง 6px, ซ้าย-ขวา 12px */
         padding: 6px 12px;
         font-size: 14px;
-        /* ขนาดกำลังดี ไม่ใหญ่เกินไป */
         font-weight: 400;
         border-radius: 0px;
-        /* โค้งมนแบบพอดี */
     }
 
     .nav-menu li a:hover {
-    background-color: #ffffff; /* ชี้แล้วเปลี่ยนสีพื้นหลังจางๆ */
-    color: var(--primary);     /* ชี้แล้วเปลี่ยนสีตัวอักษรเป็นน้ำเงิน */
+    background-color: #ffffff; 
+    color: var(--primary);     
 }
 
     .nav-menu li a.active {
@@ -113,7 +77,6 @@ $current_uri = $_SERVER['REQUEST_URI'];
         font-weight: 600;
     }
 
-    /* User Management Section */
     .user-item-wrapper {
         margin-left: 10px;
         padding-left: 20px;
@@ -160,7 +123,6 @@ $current_uri = $_SERVER['REQUEST_URI'];
         box-shadow: 0 4px 10px rgba(78, 115, 223, 0.2);
     }
 
-    /* Mobile Toggle */
     .nav-toggle {
         display: none;
     }
@@ -179,7 +141,6 @@ $current_uri = $_SERVER['REQUEST_URI'];
         border-radius: 2px;
     }
 
-    /* --- Responsive Logic --- */
     @media (max-width: 992px) {
         .nav-toggle-label {
             display: block;
@@ -226,3 +187,32 @@ $current_uri = $_SERVER['REQUEST_URI'];
         }
     }
 </style>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="/home" class="logo">
+            🚀 EVENT<span>SYSTEM</span>
+        </a>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="nav-menu">
+            <li><a href="/home" class="<?= (strpos($current_uri, 'home') !== false) ? 'active' : '' ?>">ค้นหากิจกรรม</a></li>
+            <?php if ($isLoggedIn): ?>
+                <li><a href="/create_event" class="<?= (strpos($current_uri, 'create_event') !== false) ? 'active' : '' ?>">สร้างกิจกรรม</a></li>
+                <li><a href="/join_event" class="<?= (strpos($current_uri, 'join_event') !== false) ? 'active' : '' ?>">รายการที่สมัคร</a></li>
+                <li><a href="/event_list" class="<?= (strpos($current_uri, 'event_list') !== false) ? 'active' : '' ?>">กิจกรรมของฉัน</a></li>
+                <li class="user-item-wrapper">
+                    <div class="user-control">
+                        <span class="user-greeting">สวัสดี, <span class="user-name-bold"><?= htmlspecialchars($isLoggedInName = $data['username'] ?? 'ผู้ใช้งาน') ?></span></span>
+                        <a href="/logout" class="btn-logout-minimal">ออกจากระบบ</a>
+                    </div>
+                </li>
+            <?php else: ?>
+                <li><a href="/login" class="btn-login-main">เข้าสู่ระบบ</a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</nav>

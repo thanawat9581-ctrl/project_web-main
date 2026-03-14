@@ -158,7 +158,6 @@
                 <?php while ($row = $data['result']->fetch_object()): ?>
                     <?php
                     $max = (int)$row->max_participants;
-                    // ดึงค่าจำนวนคนเช็คอินจาก current_p ที่เราทำ Subquery ไว้
                     $current = (int)($row->current_p ?? 0);
                     $is_full = ($max > 0 && $current >= $max);
                     ?>

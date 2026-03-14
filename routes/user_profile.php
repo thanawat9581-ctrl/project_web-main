@@ -1,9 +1,7 @@
 <?php
-// routes/user_profile.php
 function user_profile() {
     $conn = getConnection();
-    
-    // ตรวจสอบว่าใน URL ส่งค่า id มาจริงไหม
+
     $user_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
     if ($user_id <= 0) {
@@ -15,13 +13,12 @@ function user_profile() {
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $member = $result->fetch_object(); // ดึงข้อมูลออกมาเป็น Object
+    $member = $result->fetch_object();
 
     if (!$member) {
         die("Error: ไม่พบข้อมูลสมาชิก ID: " . $user_id . " ในฐานข้อมูล");
     }
 
-    // ส่งค่าไปที่ Template
     renderView('user_profile', [
         'member' => $member
     ]);

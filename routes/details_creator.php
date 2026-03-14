@@ -1,8 +1,8 @@
 <?php
-// routes/details_creator.php
+
 
 function getEventDetailData($conn, $id) {
-    // ดึงข้อมูลกิจกรรมและรูปภาพ
+
     $sql_event = "SELECT e.*, i.image_url FROM events e 
                   LEFT JOIN images i ON e.event_id = i.event_id 
                   WHERE e.event_id = ?";
@@ -11,7 +11,6 @@ function getEventDetailData($conn, $id) {
     $stmt_event->execute();
     $event = $stmt_event->get_result()->fetch_object();
 
-    // ดึงรายชื่อผู้สมัคร (มี u.user_id และ r.status เรียบร้อย)
     $sql_reg = "SELECT u.user_id, u.name, u.gender, u.province, 
                 TIMESTAMPDIFF(YEAR, u.birthdate, CURDATE()) as age,
                 r.register_date, r.status 
@@ -37,5 +36,5 @@ renderView('details_creator', [
     'title' => 'จัดการผู้เข้าร่วมกิจกรรม',
     'event' => $result['event'],
     'participants' => $result['list'],
-    'event_id' => $id // ส่ง id กิจกรรมไปใช้ใน Form ด้วย
+    'event_id' => $id 
 ]);

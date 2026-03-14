@@ -1,5 +1,4 @@
 <?php
-// ฟังก์ชันบันทึกกิจกรรม และคืนค่า ID ที่เพิ่งสร้าง
 function insertEvent(array $events): int|bool
 {
     $conn = getConnection();
@@ -17,14 +16,13 @@ function insertEvent(array $events): int|bool
     );
 
     if ($stmt->execute()) {
-        $last_id = $conn->insert_id; // ดึง ID ของกิจกรรมที่เพิ่งสร้าง
+        $last_id = $conn->insert_id;
         $stmt->close();
         return $last_id;
     }
     return false;
 }
 
-// ฟังก์ชันบันทึกชื่อรูปภาพลงตาราง IMAGES
 function insertEventImage(int $event_id, string $image_url): bool
 {
     $conn = getConnection();
@@ -37,7 +35,6 @@ function insertEventImage(int $event_id, string $image_url): bool
     return false;
 }
 
-// ฟังก์ชันอัปเดต Role
 function updateToCreator(int $user_id): bool
 {
     $conn = getConnection();
@@ -52,7 +49,6 @@ function updateToCreator(int $user_id): bool
     return false;
 }
 
-// --- ประมวลผลเมื่อมีการส่งฟอร์ม (POST) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['user_id'])) {
         header('Location: /login');
@@ -68,13 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'max_participants' => (int)($_POST['max_participants'] ?? 0),
     ];
 
-    // 1. บันทึกกิจกรรม
     $new_event_id = insertEvent($events);
 
     if ($new_event_id) {
-        // 2. จัดการอัปโหลดรูปภาพ
         if (isset($_FILES['event_image']) && $_FILES['event_image']['error'] === 0) {
-            $upload_dir = 'uploads/'; // ตรวจสอบว่ามีโฟลเดอร์นี้อยู่จริง
+            $upload_dir = 'uploads/'; 
             if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
 
             $file_ext = pathinfo($_FILES['event_image']['name'], PATHINFO_EXTENSION);
@@ -86,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // 3. อัปเดตบทบาทเป็น creator
         updateToCreator((int)$_SESSION['user_id']);
         $_SESSION['role'] = 'creator';
 

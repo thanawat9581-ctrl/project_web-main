@@ -29,8 +29,6 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             position: relative;
         }
-
-        /* ตกแต่งวงกลมจางๆ ด้านหลังให้ดูมีดีไซน์ */
         .login-card::after {
             content: "";
             position: absolute;
@@ -78,7 +76,7 @@
             font-family: 'Prompt', sans-serif;
             font-size: 16px;
             transition: all 0.2s ease;
-            box-sizing: border-box; /* ป้องกัน input ล้นกล่อง */
+            box-sizing: border-box;
             outline: none;
         }
 
@@ -124,8 +122,6 @@
         .register-link a:hover {
             text-decoration: underline;
         }
-
-        /* สำหรับแสดงข้อความ Error (ถ้ามี) */
         .error-msg {
             background: #fff3f3;
             color: #d9534f;

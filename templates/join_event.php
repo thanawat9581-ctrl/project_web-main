@@ -177,7 +177,7 @@
         <div class="event-list">
             <?php
             $result = $data['result'] ?? null;
-            if ($result instanceof mysqli_result && $result->num_rows > 0):
+            if ($result->num_rows > 0):
                 while ($row = $result->fetch_object()):
                     // กำหนด Class สถานะ
                     $status_class = 'status-pending';
@@ -189,8 +189,7 @@
                     } elseif ($row->reg_status === 'rejected') {
                         $status_class = 'status-rejected';
                         $status_text = '❌ ปฏิเสธการเข้าร่วม';
-                    }
-                    elseif ($row->reg_status === 'checked_in') {
+                    } elseif ($row->reg_status === 'checked_in') {
                         $status_class = 'status-joined';
                         $status_text = '✅ เข้าร่วมแล้ว';
                     }
@@ -215,9 +214,9 @@
                                 <?= $status_text ?>
                             </div>
                             <?php if ($row->reg_status === 'approved'): ?>
-                                    <a href="/get_otp?event_id=<?= (int)$row->event_id ?>" class="btn-otp">
-                                        🔑 รับรหัส OTP
-                                    </a>
+                                <a href="/get_otp?event_id=<?= (int)$row->event_id ?>" class="btn-otp">
+                                    🔑 รับรหัส OTP
+                                </a>
                             <?php endif; ?>
 
                         </div>

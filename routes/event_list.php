@@ -3,8 +3,7 @@ function getMyEvents() {
     $conn = getConnection();
     $user_id = $_SESSION['user_id'] ?? 0;
     
-    // 🎯 แก้ไขส่วน COUNT(*) ให้มีเงื่อนไข WHERE r.status = 'checked_in'
-    // เพื่อให้นับเฉพาะคนที่ยืนยัน OTP เรียบร้อยแล้วเท่านั้น
+
     $sql = "SELECT e.*, i.image_url, 
             (SELECT COUNT(*) FROM registration r 
              WHERE r.event_id = e.event_id 
@@ -19,6 +18,5 @@ function getMyEvents() {
     return $stmt->get_result();
 }
 
-// ข้อมูลที่ส่งไปยัง template 'event_list' จะมี member_count ที่นับเฉพาะคนเช็คอินแล้ว
 $result = getMyEvents();
 renderView('event_list', ['result' => $result]);

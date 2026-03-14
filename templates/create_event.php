@@ -163,7 +163,7 @@
 
     <main class="container">
         <div class="header-title">
-            <div class="icon-box">➕</div>
+            <div class="icon-box">+</div>
             <h1>สร้างกิจกรรมใหม่ของคุณ</h1>
         </div>
 
