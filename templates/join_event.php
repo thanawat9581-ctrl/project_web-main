@@ -206,6 +206,9 @@
                         <div class="event-content">
                             <h3 class="event-title"><?= htmlspecialchars($row->event_name) ?></h3>
                             <p class="event-info">
+                                    <?= mb_strimwidth(htmlspecialchars($row->description), 0, 150, "...") ?>
+                                </p>
+                            <p class="event-info">
                                 <strong>📍 สถานที่:</strong> <?= htmlspecialchars($row->location) ?><br>
                                 <strong>⏰ เวลา:</strong> <?= date('d/m/Y', strtotime($row->start_date)) ?> - <?= date('d/m/Y', strtotime($row->end_date)) ?>
                             </p>
