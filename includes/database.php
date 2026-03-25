@@ -2,7 +2,7 @@
 declare(strict_types=1);
 function getConnection(): mysqli
 {
-    $hostname = '103.27.201.8';
+    $hostname = '*******';
     $dbName = 'blabonli_eventsystem';
     $username = 'blabonli_User1';
     $password = '@pw112233';
